@@ -1,0 +1,12 @@
+#platformio
+radar-subsystem-unit/.pio/
+radar-subsystem-unit/.vscode/
+
+#java e maven
+console-subsystem-unit/target/
+console-subsystem-unit/.settings/
+console-subsystem-unit/.project
+console-subsystem-unit/.classpath
+
+#vs code generico
+**/.DS_Store

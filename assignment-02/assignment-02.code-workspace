@@ -1,0 +1,14 @@
+{
+    "folders": [
+        {
+            "path": "radar_subsystem_unit"
+        },
+        {
+            "path": "console_subsystem_unit"
+        }
+    ],
+    "settings": {
+        "java.project.sourcePaths": ["console_subsystem_unit/src/main/java"],
+        "java.compile.nullAnalysis.mode": "automatic"
+    }
+}

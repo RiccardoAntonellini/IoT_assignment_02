@@ -34,5 +34,5 @@
 
 #define SERIAL_BAUD 9600
 
-//per scheduler
+//Scheduler
 #define BASE_PERIOD 50

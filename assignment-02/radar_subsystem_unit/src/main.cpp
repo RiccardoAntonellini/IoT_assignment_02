@@ -1,18 +1,22 @@
 #include <Arduino.h>
+#include "kernel/Scheduler.h"
+#include "model/Context.h"
+// mancano include dei tasks
 
-// put function declarations here:
-int myFunction(int, int);
+Scheduler scheduler; // istanza unica
+Context ctx;
 
 void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+
+  Serial.begin(SERIAL_BAUD);
+
+  scheduler.init(BASE_PERIOD);
+
+  //ogni task creato una volta sola e aggiunto in ordine di esecuzione, tutta la logica sta nei task stessi
+  scheduler.addTask(new AlarmLedTask(&ctx));
+  // e altri vari
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-}
-
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+  scheduler.schedule();
 }

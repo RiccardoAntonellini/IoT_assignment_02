@@ -8,11 +8,11 @@
         {
             "name": "PlatformIO",
             "includePath": [
-                "C:/Users/rican/Desktop/assignment-02/radar_subsystem_unit/include",
-                "C:/Users/rican/Desktop/assignment-02/radar_subsystem_unit/src",
-                "C:/Users/rican/Desktop/assignment-02/radar_subsystem_unit/.pio/libdeps/uno/LiquidCrystal_I2C",
+                "C:/Users/rican/Desktop/IoT_assignment_02/assignment-02/radar_subsystem_unit/include",
+                "C:/Users/rican/Desktop/IoT_assignment_02/assignment-02/radar_subsystem_unit/src",
+                "C:/Users/rican/Desktop/IoT_assignment_02/assignment-02/radar_subsystem_unit/.pio/libdeps/uno/LiquidCrystal_I2C",
                 "C:/Users/rican/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
-                "C:/Users/rican/Desktop/assignment-02/radar_subsystem_unit/.pio/libdeps/uno/Servo/src",
+                "C:/Users/rican/Desktop/IoT_assignment_02/assignment-02/radar_subsystem_unit/.pio/libdeps/uno/Servo/src",
                 "C:/Users/rican/.platformio/packages/framework-arduino-avr/cores/arduino",
                 "C:/Users/rican/.platformio/packages/framework-arduino-avr/variants/standard",
                 "C:/Users/rican/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
@@ -24,11 +24,11 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
-                    "C:/Users/rican/Desktop/assignment-02/radar_subsystem_unit/include",
-                    "C:/Users/rican/Desktop/assignment-02/radar_subsystem_unit/src",
-                    "C:/Users/rican/Desktop/assignment-02/radar_subsystem_unit/.pio/libdeps/uno/LiquidCrystal_I2C",
+                    "C:/Users/rican/Desktop/IoT_assignment_02/assignment-02/radar_subsystem_unit/include",
+                    "C:/Users/rican/Desktop/IoT_assignment_02/assignment-02/radar_subsystem_unit/src",
+                    "C:/Users/rican/Desktop/IoT_assignment_02/assignment-02/radar_subsystem_unit/.pio/libdeps/uno/LiquidCrystal_I2C",
                     "C:/Users/rican/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
-                    "C:/Users/rican/Desktop/assignment-02/radar_subsystem_unit/.pio/libdeps/uno/Servo/src",
+                    "C:/Users/rican/Desktop/IoT_assignment_02/assignment-02/radar_subsystem_unit/.pio/libdeps/uno/Servo/src",
                     "C:/Users/rican/.platformio/packages/framework-arduino-avr/cores/arduino",
                     "C:/Users/rican/.platformio/packages/framework-arduino-avr/variants/standard",
                     "C:/Users/rican/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",

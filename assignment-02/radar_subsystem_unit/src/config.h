@@ -33,3 +33,6 @@
 #define LCD_ROWS 2
 
 #define SERIAL_BAUD 9600
+
+//per scheduler
+#define BASE_PERIOD 50

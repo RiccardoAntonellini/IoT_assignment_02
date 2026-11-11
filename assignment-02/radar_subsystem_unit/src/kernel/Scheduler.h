@@ -11,7 +11,7 @@ class Scheduler {
         ~Scheduler();
 
         void init(int basePeriod);
-        void addTask(Task* task);
+        bool addTask(Task* task);
         void schedule();
         void resync();
 

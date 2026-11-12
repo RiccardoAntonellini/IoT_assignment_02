@@ -50,3 +50,5 @@
 
 // Scheduler
 #define BASE_PERIOD 50
+
+#define BLINK_TIME 250

@@ -10,7 +10,7 @@ class LedTask : public Task {
     void tick() override;
 
     private: 
-        enum State{OFF, BLINKING_ON, BLINKING_OFF, ON} state;
+        enum State{OFF, BLINKING_ON, BLINKING_OFF, ON} state; //Spento (fisso), Acceso (lampeggiante), Spento (lampeggiante), Acceso (fisso)
         Context* ctx;
         Led* led;
 };

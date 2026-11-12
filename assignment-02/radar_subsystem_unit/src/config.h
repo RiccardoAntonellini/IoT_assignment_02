@@ -33,6 +33,7 @@
 #define TENSIONE_USCITA_0C_TS 0.5
 #define TENSIONE_PER_GRADOC_TS 0.01
 #define CAMPIONI_PER_MEDIA_RUMORE_TS 8
+#define TEMP_PERIOD 1000
 
 // Parametri abritrari
 #define N_SECTORS 8
@@ -50,7 +51,4 @@
 
 // Scheduler
 #define BASE_PERIOD 50
-
 #define BLINK_TIME 250
-
-#define TEMP_PERIOD 1000

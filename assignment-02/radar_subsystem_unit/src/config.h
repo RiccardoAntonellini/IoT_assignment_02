@@ -52,3 +52,5 @@
 #define BASE_PERIOD 50
 
 #define BLINK_TIME 250
+
+#define TEMP_PERIOD 1000

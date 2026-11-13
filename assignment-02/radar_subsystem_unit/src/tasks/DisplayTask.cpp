@@ -1,8 +1,8 @@
 #include "DisplayTask.h"
-#include "../../config.h"
+#include "../config.h"
 #include <stdio.h>
 
-DisplayTask::DisplayTask(Context* ctx, Display* display) : Task(DISPLAY_PERIOD) {
+DisplayTask::DisplayTask(Context* ctx, Display* display) : Task(COMM_TIME) {
     this->ctx = ctx;
     this->display = display;
     this->state = DISPLAY_OFF;

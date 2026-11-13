@@ -1,15 +1,15 @@
 #pragma once
 
 // Pulsanti
-#define START_BUTTON_PIN    2
-#define STOP_BUTTON_PIN     12
-#define RESET_BUTTON_PIN    13
+#define START_BUTTON_PIN 2
+#define STOP_BUTTON_PIN 12
+#define RESET_BUTTON_PIN 13
 
 #define BUTTON_DEBOUNCE_MS 20
 
 // Led
-#define LED_ON_PIN  9
-#define LED_ALARM_PIN  8
+#define LED_ON_PIN 9
+#define LED_ALARM_PIN 8
 
 // Servo
 #define SERVO_PIN 4
@@ -17,8 +17,8 @@
 #define MAX_ANGLE 180
 
 // Sonar
-#define SONAR_ECHO_PIN  3
-#define SONAR_TRIG_PIN  11
+#define SONAR_ECHO_PIN 3
+#define SONAR_TRIG_PIN 11
 
 #define SONAR_MAX_DISTANCE 0.40 // portata massima in metri
 

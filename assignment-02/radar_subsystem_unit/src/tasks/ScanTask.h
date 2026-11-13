@@ -14,8 +14,8 @@ class ScanTask : public Task {
         Context* ctx;
         Potentiometer* pot;
         Sonar* sonar;
-        Servo* servo;
+        RadarServo* servo;
         int currentSector = 0;
 
         void scanStep(); //muove il servo, misura, e aggiorna il context
-}
+};

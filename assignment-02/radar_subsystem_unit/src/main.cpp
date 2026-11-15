@@ -30,12 +30,14 @@ void setup() {
   scheduler.addTask(new ButtonTask(&ctx, startButton, stopButton, resetButton));
 
   Potentiometer *pot = new Potentiometer(SERVO_PIN);
-
   RadarServo *servo = new RadarServo(SERVO_PIN);
-
   Sonar *sonar = new Sonar(SONAR_TRIG_PIN, SONAR_ECHO_PIN);
+  scheduler.addTask(new ScanTask(sonar, &ctx, pot, servo));
 
   TempSensor *tempSensor = new TempSensor(TEMP_PIN);
+  scheduler.addTask(new TempTask(&ctx, tempSensor));
+
+  //MANCA IMPLEMENTAZIONE SYSTEM TASK E COMM TASK
 }
 
 void loop() {

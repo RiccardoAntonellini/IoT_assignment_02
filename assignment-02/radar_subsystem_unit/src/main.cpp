@@ -31,7 +31,7 @@ void setup() {
   Button *resetButton = new Button(RESET_BUTTON_PIN);
   scheduler.addTask(new ButtonTask(&ctx, startButton, stopButton, resetButton));
 
-  Potentiometer *pot = new Potentiometer(SERVO_PIN);
+  Potentiometer *pot = new Potentiometer(POT_PIN);
   RadarServo *servo = new RadarServo(SERVO_PIN);
   Sonar *sonar = new Sonar(SONAR_TRIG_PIN, SONAR_ECHO_PIN);
   scheduler.addTask(new ScanTask(sonar, &ctx, pot, servo));

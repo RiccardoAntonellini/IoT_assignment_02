@@ -7,6 +7,8 @@
 #include "tasks/ScanTask.h"
 #include "tasks/SystemTask.h"
 #include "tasks/TempTask.h"
+#include "tasks/CommTask.h"
+#include "tasks/DisplayTask.h"
 
 Scheduler scheduler; // istanza unica
 Context ctx;
@@ -37,7 +39,10 @@ void setup() {
   TempSensor *tempSensor = new TempSensor(TEMP_PIN);
   scheduler.addTask(new TempTask(&ctx, tempSensor));
 
-  //MANCA IMPLEMENTAZIONE SYSTEM TASK E COMM TASK
+  Display *display = new Display();
+  scheduler.addTask(new DisplayTask(&ctx, display));
+
+  scheduler.addTask(new CommTask(&ctx));
 }
 
 void loop() {

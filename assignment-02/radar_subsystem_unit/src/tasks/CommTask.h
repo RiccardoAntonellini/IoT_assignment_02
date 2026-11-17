@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../kernel/Task.h"
 #include "../model/Context.h"
 
@@ -10,6 +12,6 @@ class CommTask : public Task {
         Context* ctx;
         SystemState lastState; //ultimo stato inviato
         int lastSector; //ultimo settore inviato
-        bool firstSend; //per inviare 
+        bool firstSend; //per inviare
         const char* stateToString(SystemState s);
 };

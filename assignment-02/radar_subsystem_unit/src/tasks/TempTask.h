@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../devices/TempSensor.h"
 #include "../kernel/Task.h"
 #include "../model/Context.h"

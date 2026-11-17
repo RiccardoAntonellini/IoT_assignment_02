@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../kernel/Task.h"
 #include "../model/Context.h"
 #include "../devices/Led.h"

@@ -9,7 +9,7 @@ CommTask::CommTask(Context* ctx) : Task(COMM_TIME) {
     this->firstSend = true;
 }
 
-const char* stateToString(SystemState s) {
+const char* CommTask::stateToString(SystemState s) {
     if(s == IDLE) {
         return "IDLE";
     }
@@ -22,7 +22,7 @@ const char* stateToString(SystemState s) {
     else if(s == ALARM) {
         return "ALARM";
     }
-    else 
+    else
         return "UNKWNOWN";
 }
 

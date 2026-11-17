@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../kernel/Task.h"
 #include "../devices/Sonar.h"
 #include "../devices/RadarServo.h"

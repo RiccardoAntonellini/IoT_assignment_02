@@ -7,7 +7,6 @@
 #include "tasks/ScanTask.h"
 #include "tasks/SystemTask.h"
 #include "tasks/TempTask.h"
-#include "tasks/CommTask.h"
 #include "tasks/DisplayTask.h"
 
 Scheduler scheduler; // istanza unica

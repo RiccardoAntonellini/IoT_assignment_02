@@ -23,7 +23,7 @@ const char* CommTask::stateToString(SystemState s) {
         return "ALARM";
     }
     else
-        return "UNKWNOWN";
+        return "UNKNOWN";
 }
 
 void CommTask::tick() {
@@ -35,13 +35,21 @@ void CommTask::tick() {
         firstSend = false;
     }
 
-    if(ctx->state == WORKING || ctx->state == PREALARM || ctx->state == ALARM) {
-        if(ctx->sector != lastSector) {
-            Serial.print("SCANNING THIS SECTOR: ");
-            Serial.print(ctx->sector);
-            Serial.println(ctx->foundObject ? "Found" : "Not Found");
-            Serial.print("At " + String(ctx->distance) + "distance");
-            lastSector = ctx->sector;
-        }
+    bool radarIsScanning = (ctx->state == WORKING || ctx->state == PREALARM || ctx->state == ALARM);
+
+    // invio il settore solo se è cambiato
+    if(radarIsScanning && ctx->sector != lastSector) {
+        int objectDetected = ctx->foundObject ? 1 : 0;
+        int distanceCm = ctx->foundObject ? (int)(ctx->distance * 100) : 0;
+
+        // formato --> SECTOR:*settore*:*oggetto (0/1)*:*distanza (cm)*
+        Serial.print("SECTOR:");
+        Serial.print(ctx->sector);
+        Serial.print(':');
+        Serial.print(objectDetected);
+        Serial.print(':');
+        Serial.println(distanceCm);
+
+        lastSector = ctx->sector;
     }
 }

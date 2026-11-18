@@ -9,7 +9,7 @@ CommTask::CommTask(Context* ctx) : Task(COMM_TIME) {
     this->firstSend = true;
 }
 
-const char* stateToString(SystemState s) {
+const char* CommTask::stateToString(SystemState s) {
     if(s == IDLE) {
         return "IDLE";
     }
@@ -39,7 +39,7 @@ void CommTask::tick() {
         if(ctx->sector != lastSector) {
             Serial.print("SCANNING THIS SECTOR: ");
             Serial.print(ctx->sector);
-            Serial.println(ctx->foundObject ? "Found" : "Not Found");
+            Serial.println(ctx->foundObject ? " Found" : " Not Found");
             Serial.print("At " + String(ctx->distance) + "distance");
             lastSector = ctx->sector;
         }

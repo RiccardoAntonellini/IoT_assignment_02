@@ -24,10 +24,11 @@ void RadarServo::off() {
 }
 
 void RadarServo::setAngle(int newAngle) {
-    angle = constrain(newAngle, MIN_ANGLE, MAX_ANGLE);
-    if (attached) {
-        servo.write(angle);
+    if (!attached) {
+        on();
     }
+    angle = constrain(newAngle, MIN_ANGLE, MAX_ANGLE);
+    servo.write(angle);
 }
 
 void RadarServo::setSector(int sector) {

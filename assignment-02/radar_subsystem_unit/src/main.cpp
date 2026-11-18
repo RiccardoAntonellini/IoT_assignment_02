@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <avr/sleep.h>
 #include "kernel/Scheduler.h"
 #include "model/Context.h"
 #include "tasks/ButtonTask.h"
@@ -11,6 +12,28 @@
 
 Scheduler scheduler; // istanza unica
 Context ctx;
+
+int idleTimeMs = 0;   // da quanto tempo il sistema è in IDLE
+
+// ISR di risveglio: si stacca subito, altrimenti con il pin LOW si rilancerebbe di continuo
+void wakeUpHandler() {
+  detachInterrupt(digitalPinToInterrupt(START_BUTTON_PIN));
+}
+
+void goToSleep() {
+  Serial.flush();                                  // svuota il buffer seriale (altrimenti STATE:IDLE resta tagliato)
+
+  set_sleep_mode(SLEEP_MODE_PWR_DOWN);             // modalità di sonno più profonda
+  noInterrupts();                                  // niente interrupt tra attach e sleep, per non perdere il risveglio
+  sleep_enable();
+  attachInterrupt(digitalPinToInterrupt(START_BUTTON_PIN), wakeUpHandler, LOW);  // in power-down vale solo il livello LOW
+  interrupts();
+  sleep_cpu();                                     // l'MCU si ferma qui finché START non va a LOW
+
+  // ---- risveglio: si riparte da qui ----
+  sleep_disable();
+  scheduler.resync();                              // millis() era fermo: riallineo lo scheduler
+}
 
 void setup() {
   Serial.begin(SERIAL_BAUD);
@@ -52,5 +75,15 @@ void setup() {
 }
 
 void loop() {
-  scheduler.schedule();
+  scheduler.schedule();                            // un tick: tutti i task fanno un passo
+
+  if (ctx.state == IDLE) {
+    idleTimeMs += BASE_PERIOD;                     // conto il tempo passato in IDLE
+    if (idleTimeMs >= SLEEP_DELAY_MS) {
+      goToSleep();
+      idleTimeMs = 0;                              // al risveglio riparto da zero
+    }
+  } else {
+    idleTimeMs = 0;                                // fuori da IDLE non si dorme
+  }
 }

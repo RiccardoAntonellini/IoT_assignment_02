@@ -54,3 +54,6 @@
 #define BLINK_TIME 250
 
 #define COMM_TIME 200
+
+// Sleep
+#define SLEEP_DELAY_MS 400

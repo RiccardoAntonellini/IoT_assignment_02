@@ -22,8 +22,8 @@ const char* CommTask::stateToString(SystemState s) {
     else if(s == ALARM) {
         return "ALARM";
     }
-    else 
-        return "UNKWNOWN";
+    else
+        return "UNKNOWN";
 }
 
 void CommTask::tick() {

@@ -23,8 +23,7 @@ float TempSensor::readCelsius() const {
     return (voltage - TENSIONE_USCITA_0C_TS) / TENSIONE_PER_GRADOC_TS;
 }
 
-
-
 float TempSensor::speedCalc(float celsius) const {
-  return 331.3f + 0.606f * celsius;
+    // formula
+    return 331.3f + 0.606f * celsius;
 }

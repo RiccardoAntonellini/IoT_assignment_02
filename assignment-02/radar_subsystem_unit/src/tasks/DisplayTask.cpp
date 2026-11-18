@@ -24,12 +24,12 @@ void DisplayTask::tick() {
     if (state == DISPLAY_OFF) {
         if (ctx->state != IDLE) {
             display->backLightOn();
-            lastState = IDLE;      // forza la prima scrittura
+            lastState = IDLE;// forza la prima scrittura
             lastSector = -1;
             state = DISPLAY_ON;
         }
     }
-    else { // DISPLAY_ON
+    else {// DISPLAY_ON
         if (ctx->state == IDLE) {
             display->clear();
             display->backLightOff();
@@ -49,7 +49,7 @@ void DisplayTask::tick() {
                 // in alarm mostro l'angolo manuale del radar
                 snprintf(line, sizeof(line), "Angolo: %d", ctx->manualAngle);
             } else if (ctx->foundObject) {
-                // distanza in centimetri, intera (snprintf non supporta %f su AVR)
+                // distanza intera in centimetri
                 snprintf(line, sizeof(line), "S%d/%d Obj %dcm",
                          ctx->sector + 1, N_SECTORS, (int)(ctx->distance * 100));
             } else {

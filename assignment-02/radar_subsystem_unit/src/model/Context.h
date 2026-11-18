@@ -12,14 +12,13 @@ enum SystemState {
 struct Context {
     SystemState state = IDLE;
 
-    //scansione
-
+    // scansione
     int sector = 0;
     bool foundObject = false;
     float distance = 0;
 
-    //temp
-    float temperature = 20.0; // In celcius
+    // temp
+    float temperature = 20.0;
     float soundSpeed = 343.0;
 
     bool startPressed = false;

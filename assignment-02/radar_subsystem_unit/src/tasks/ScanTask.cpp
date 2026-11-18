@@ -17,32 +17,32 @@ void ScanTask::scanStep() {
     if(ctx->state == PREALARM) {
         setPeriod(SCAN_PERIOD_S2);
     }
-    else 
+    else
         setPeriod(SCAN_PERIOD_S1);
 
     servo->setSector(currentSector);
     ctx->sector = currentSector;
-    float distance = sonar->measure(ctx->soundSpeed); //Cerchiamo la distanza dell'oggetto
+    float distance = sonar->measure(ctx->soundSpeed);// cerca la distanza dell'oggetto
     ctx->distance = distance;
-    ctx->foundObject = (distance > 0 && distance < SONAR_MAX_DISTANCE); //restituisce true solo se l'oggetto c'è ed è ad una distanza non troppo ampia.
+    ctx->foundObject = (distance > 0 && distance < SONAR_MAX_DISTANCE);// restituisce true solo se l'oggetto c'è ed è ad una distanza non troppo ampia
 }
 
 int ScanTask::angleToSector(int angle, int numSectors) {
-    // Limita l'angolo per sicurezza tra 0 e 180
+    // limita l'angolo per sicurezza tra 0 e 180
     angle = constrain(angle, 0, 180);
-    
-    // Calcola l'ampiezza di ogni settore (es. 180 / 10 = 18 gradi a settore)
-    // Usando la divisione intera, 180 / 18 darebbe 10 (fuori range 0..9), quindi usiamo min()
+
+    // calcola l'ampiezza di ogni settore (es: 180 / 10 = 18 gradi a settore)
+    // usando la divisione intera, 180 / 18 darebbe 10 (fuori range 0..9) quindi usiamo min()
     int sector = (angle * numSectors) / 180;
     return min(sector, numSectors - 1);
 }
 
 int ScanTask::sectorToAngle(int sector, int numSectors) {
-    // Limita il settore per sicurezza tra 0 e numSectors - 1
+    // limita il settore per sicurezza tra 0 e numSectors - 1
     sector = constrain(sector, 0, numSectors - 1);
-    
-    // Calcola il centro dello spicchio corrispondente al settore
-    // Esempio con 10 settori (ampiezza 18° ciascuno):
+
+    // calcola il centro dello spicchio corrispondente al settore
+    // esempio con 10 settori (ampiezza 18° ciascuno):
     // settore 0 -> 9°, settore 1 -> 27°, ..., settore 9 -> 171°
     int angle = ((sector * 2 + 1) * 180) / (numSectors * 2);
     return constrain(angle, 0, 180);
@@ -108,7 +108,7 @@ void ScanTask::tick() {
             ctx->manualAngle = angle;
             servo->setAngle(angle);
             ctx->sector = angleToSector(angle, N_SECTORS);
-            
+
             float distance = sonar->measure(ctx->soundSpeed);
             ctx->distance = distance;
             ctx->foundObject = (distance > 0 && distance < SONAR_MAX_DISTANCE);

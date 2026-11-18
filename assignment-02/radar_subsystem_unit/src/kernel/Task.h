@@ -4,7 +4,8 @@ class Task
 {
     public:
         Task(int period): myPeriod(period), timeElapsed(0), active(true) {};
-        virtual void tick() = 0; //ciò che deve fare veramente la task
+        // ogni task deve avere questo metodo ma lo scrive chi eredita da task
+        virtual void tick() = 0;
 
         bool updateAndCheckTime(int basePeriod) {
             timeElapsed += basePeriod;

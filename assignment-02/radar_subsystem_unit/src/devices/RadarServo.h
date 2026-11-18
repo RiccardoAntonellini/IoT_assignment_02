@@ -11,12 +11,12 @@ class RadarServo {
         void off();
         void setAngle(int angle);
         void setSector(int sector);
-        int getAngle() const; // ultimo angolo comandato
+        int getAngle() const;// ultimo angolo comandato
         bool isOn() const;
 
     private:
         uint8_t pin;
         Servo servo;
-        int angle; // ultimo angolo comandato
+        int angle;// ultimo angolo comandato
         bool attached;
 };

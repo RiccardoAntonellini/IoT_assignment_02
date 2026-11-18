@@ -5,7 +5,7 @@
 Button::Button(uint8_t pin) : pin(pin), rawState(false), stableState(false), pressedEvent(false), lastChangeTime(0) {}
 
 void Button::init() {
-    pinMode(pin, INPUT_PULLUP); // a riposo il pin è HIGH
+    pinMode(pin, INPUT_PULLUP);// a riposo il pin è HIGH
     rawState = stableState = (digitalRead(pin) == LOW);
     lastChangeTime = millis();
 }
@@ -13,7 +13,7 @@ void Button::init() {
 void Button::update() {
     pressedEvent = false;
 
-    bool reading = (digitalRead(pin) == LOW); // lettura grezza
+    bool reading = (digitalRead(pin) == LOW);// lettura grezza
 
     if (reading != rawState) {
         rawState = reading;
@@ -24,7 +24,7 @@ void Button::update() {
     if (rawState != stableState && (millis() - lastChangeTime) >= BUTTON_DEBOUNCE_MS) {
         stableState = rawState;
         if (stableState) {
-            pressedEvent = true; // rilasciato --> premuto
+            pressedEvent = true;// rilasciato --> premuto
         }
     }
 }

@@ -8,7 +8,7 @@ class Sonar {
     public:
         Sonar(uint8_t trigPin, uint8_t echoPin);
         void init();
-        float measure(float soundSpeed); // in metri
+        float measure(float soundSpeed);// in metri
 
     private:
         uint8_t trigPin;

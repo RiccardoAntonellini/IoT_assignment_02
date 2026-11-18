@@ -22,7 +22,7 @@ class ScanTask : public Task {
         bool potMoved = false;
         int initialPotAngle = 0;
 
-        void scanStep(); //muove il servo, misura, e aggiorna il context
+        void scanStep();// muove il servo, misura, e aggiorna il context
         int angleToSector(int angle, int numSectors);
         int sectorToAngle(int sector, int numSectors);
 };

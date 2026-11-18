@@ -12,7 +12,7 @@ void Display::init() {
 void Display::clear() {
     lcd.clear();
 
-    for (uint8_t r = 0; r < LCD_ROWS; r++) { // allineamento della copia locale, spazi in ogni riga
+    for (uint8_t r = 0; r < LCD_ROWS; r++) {// allineamento della copia locale, spazi in ogni riga
         memset(lines[r], ' ', LCD_COLS);
         lines[r][LCD_COLS] = '\0';
     }
@@ -21,7 +21,7 @@ void Display::clear() {
 void Display::printLine(uint8_t row, const char *text) {
 
     if (row >= LCD_ROWS || text == nullptr) {
-        return; // parametri non validi
+        return;// parametri non validi
     }
 
     // costruisco la riga di LCD_COLS caratteri, tronco se di più e metto spazi se di meno

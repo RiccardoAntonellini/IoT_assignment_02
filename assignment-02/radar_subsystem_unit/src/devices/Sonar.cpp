@@ -28,7 +28,7 @@ float Sonar::measure(float soundSpeed) {
 
     // distanza = velocità * tempo / 2 (andata e ritorno)
     float distance = echoMicroseconds * soundSpeed / 2000000.0f;
-    if (distance > SONAR_MAX_DISTANCE) { // scarto l'echo al limite
+    if (distance > SONAR_MAX_DISTANCE) {// scarto l'echo al limite
         return SONAR_NO_OBJECT;
     }
 

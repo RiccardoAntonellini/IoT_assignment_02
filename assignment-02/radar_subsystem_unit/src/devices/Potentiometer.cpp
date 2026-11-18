@@ -8,7 +8,7 @@ void Potentiometer::init() {
 }
 
 int Potentiometer::readRaw() const {
-    return analogRead(pin); //conversione a 10 bit
+    return analogRead(pin);//conversione a 10 bit
 }
 
 int Potentiometer::getAngle() const {

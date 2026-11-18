@@ -15,5 +15,5 @@ class Display {
 
     private:
         LiquidCrystal_I2C lcd;
-        char lines[LCD_ROWS][LCD_COLS + 1]; // copia per evitare di scrivere due volte la stessa cosa
+        char lines[LCD_ROWS][LCD_COLS + 1];// copia per evitare di scrivere due volte la stessa cosa
 };

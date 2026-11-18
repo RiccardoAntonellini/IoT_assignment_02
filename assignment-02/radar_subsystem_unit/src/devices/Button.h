@@ -4,7 +4,7 @@
 
 class Button {
     public:
-        explicit Button(uint8_t pin); // mi obbligo ad esplicitare la creazione di un Button
+        explicit Button(uint8_t pin);// mi obbligo ad esplicitare la creazione di un Button
         void init();
         void update();
         bool isPressed() const;

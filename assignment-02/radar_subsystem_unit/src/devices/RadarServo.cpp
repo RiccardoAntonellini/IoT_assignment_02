@@ -5,7 +5,7 @@ RadarServo::RadarServo(uint8_t pin) : pin(pin), angle(MIN_ANGLE), attached(false
 
 void RadarServo::init() {
     angle = MIN_ANGLE;
-    attached = false; // idle, non riceve impulsi
+    attached = false;// idle, non riceve impulsi
 }
 
 void RadarServo::on() {
@@ -13,7 +13,7 @@ void RadarServo::on() {
         servo.attach(pin);
         attached = true;
     }
-    servo.write(angle); // riporta il servo all'ultimo angolo noto
+    servo.write(angle);// riporta il servo all'ultimo angolo noto
 }
 
 void RadarServo::off() {

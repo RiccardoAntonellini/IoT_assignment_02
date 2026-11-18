@@ -13,7 +13,7 @@ void ButtonTask::tick() {
     stopButton->update();
     resetButton->update();
 
-    if (startButton->justPressed()) ctx->startPressed = true; //Aggiorniamo lo stato nel context se è appena stato premuto
+    if (startButton->justPressed()) ctx->startPressed = true;// aggiorna lo stato nel context se è appena stato premuto
     if (stopButton->justPressed())  ctx->stopPressed  = true;
     if (resetButton->justPressed()) ctx->resetPressed = true;
 }

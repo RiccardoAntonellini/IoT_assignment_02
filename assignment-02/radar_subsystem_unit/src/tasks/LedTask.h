@@ -5,12 +5,12 @@
 #include "../model/Context.h"
 
 class LedTask : public Task {
-    public: 
-    LedTask(Context* ctx, Led* led); //* indica un puntatore all'oggetto
+    public:
+    LedTask(Context* ctx, Led* led);
     void tick() override;
 
-    private: 
-        enum State{OFF, BLINKING_ON, BLINKING_OFF, ON} state; //Spento (fisso), Acceso (lampeggiante), Spento (lampeggiante), Acceso (fisso)
+    private:
+        enum State{OFF, BLINKING_ON, BLINKING_OFF, ON} state;// on, off, lampeggiava quindi va spento, non lampeggiava quindi va acceso
         Context* ctx;
         Led* led;
 };

@@ -20,4 +20,5 @@ class ScanTask : public Task {
         int currentSector = 0;
 
         void scanStep(); //muove il servo, misura, e aggiorna il context
+        int angleToSector(int angle, int numSectors);
 };

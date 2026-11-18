@@ -37,8 +37,8 @@
 
 // Parametri abritrari
 #define N_SECTORS 8
-#define D1 0.10
-#define D2 0.25
+#define D1 0.05
+#define D2 0.30
 #define SCAN_PERIOD_S1 200
 #define SCAN_PERIOD_S2 100
 

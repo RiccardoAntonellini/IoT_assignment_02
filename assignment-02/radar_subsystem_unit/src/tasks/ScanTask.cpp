@@ -24,6 +24,16 @@ void ScanTask::scanStep() {
     ctx->foundObject = (distance > 0 && distance < SONAR_MAX_DISTANCE); //restituisce true solo se l'oggetto c'è ed è ad una distanza non troppo ampia.
 }
 
+int ScanTask::angleToSector(int angle, int numSectors) {
+    // Limita l'angolo per sicurezza tra 0 e 180
+    angle = constrain(angle, 0, 180);
+    
+    // Calcola l'ampiezza di ogni settore (es. 180 / 10 = 18 gradi a settore)
+    // Usando la divisione intera, 180 / 18 darebbe 10 (fuori range 0..9), quindi usiamo min()
+    int sector = (angle * numSectors) / 180;
+    return min(sector, numSectors - 1);
+}
+
 void ScanTask::tick() {
     if(state == STOPPED) {
         if(ctx->state == WORKING || ctx->state == PREALARM) {
@@ -71,6 +81,10 @@ void ScanTask::tick() {
             int angle = pot->getAngle();
             ctx -> manualAngle = angle;
             servo->setAngle(angle);
+            ctx->sector = angleToSector(angle, N_SECTORS);
+            float distance = sonar->measure(ctx->soundSpeed);
+            ctx->distance = distance;
+            ctx->foundObject = (distance > 0 && distance < SONAR_MAX_DISTANCE);
         }
         else {
             state = STOPPED;

@@ -36,11 +36,14 @@ void CommTask::tick() {
     }
 
     if(ctx->state == WORKING || ctx->state == PREALARM || ctx->state == ALARM) {
-        if(ctx->sector != lastSector) {
+        bool sectorChanged = (ctx->sector != lastSector);
+        bool alarmObjectDetected = (ctx->state == ALARM && ctx->foundObject);
+
+        if(sectorChanged || alarmObjectDetected) {
             Serial.print("SCANNING THIS SECTOR: ");
             Serial.print(ctx->sector);
             Serial.println(ctx->foundObject ? " Found" : " Not Found");
-            Serial.print("At " + String(ctx->distance) + "distance");
+            Serial.println("At " + String(ctx->distance) + " distance");
             lastSector = ctx->sector;
         }
     }

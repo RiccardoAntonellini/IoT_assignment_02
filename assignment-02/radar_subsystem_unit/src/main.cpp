@@ -10,29 +10,27 @@
 #include "tasks/TempTask.h"
 #include "tasks/DisplayTask.h"
 
-Scheduler scheduler; // istanza unica
+Scheduler scheduler;
 Context ctx;
 
-int idleTimeMs = 0;   // da quanto tempo il sistema è in IDLE
+int idleTimeMs = 0;
 
-// ISR di risveglio: si stacca subito, altrimenti con il pin LOW si rilancerebbe di continuo
+// stacca subito l'interrupt altrimenti con il pin low si rilancerebbe di continuo e bloccherebbe tutto
 void wakeUpHandler() {
   detachInterrupt(digitalPinToInterrupt(START_BUTTON_PIN));
 }
 
 void goToSleep() {
-  Serial.flush();                                  // svuota il buffer seriale (altrimenti STATE:IDLE resta tagliato)
-
-  set_sleep_mode(SLEEP_MODE_PWR_DOWN);             // modalità di sonno più profonda
-  noInterrupts();                                  // niente interrupt tra attach e sleep, per non perdere il risveglio
+  Serial.flush();// svuota buffer seriale
+  set_sleep_mode(SLEEP_MODE_PWR_DOWN);// cpu + timer fermi
+  noInterrupts();// evita che il pulsante venga premuto tra prep e sleep
   sleep_enable();
-  attachInterrupt(digitalPinToInterrupt(START_BUTTON_PIN), wakeUpHandler, LOW);  // in power-down vale solo il livello LOW
+  attachInterrupt(digitalPinToInterrupt(START_BUTTON_PIN), wakeUpHandler, LOW);// pin 2 low allora si sveglia
   interrupts();
-  sleep_cpu();                                     // l'MCU si ferma qui finché START non va a LOW
+  sleep_cpu();// mcu si ferma qui finché non si preme start
 
-  // ---- risveglio: si riparte da qui ----
   sleep_disable();
-  scheduler.resync();                              // millis() era fermo: riallineo lo scheduler
+  scheduler.resync();// sincronizza nuovamente il timer millis così che il ritmo dei tick rimanga regolare
 }
 
 void setup() {
@@ -50,7 +48,7 @@ void setup() {
   Button *startButton = new Button(START_BUTTON_PIN);
   Button *stopButton = new Button(STOP_BUTTON_PIN);
   Button *resetButton = new Button(RESET_BUTTON_PIN);
-  startButton->init();                    // pinMode INPUT_PULLUP + stato iniziale reale
+  startButton->init();
   stopButton->init();
   resetButton->init();
   scheduler.addTask(new ButtonTask(&ctx, startButton, stopButton, resetButton));
@@ -59,8 +57,8 @@ void setup() {
   RadarServo *servo = new RadarServo(SERVO_PIN);
   Sonar *sonar = new Sonar(SONAR_TRIG_PIN, SONAR_ECHO_PIN);
   pot->init();
-  servo->init();                          // prepara lo stato, non attacca ancora il servo
-  sonar->init();                          // pinMode di TRIG ed ECHO
+  servo->init();
+  sonar->init();
   scheduler.addTask(new ScanTask(sonar, &ctx, pot, servo));
 
   TempSensor *tempSensor = new TempSensor(TEMP_PIN);
@@ -68,22 +66,22 @@ void setup() {
   scheduler.addTask(new TempTask(&ctx, tempSensor));
 
   Display *display = new Display();
-  display->init();                        // avvia I2C e accende la retroilluminazione
+  display->init();
   scheduler.addTask(new DisplayTask(&ctx, display));
 
   scheduler.addTask(new CommTask(&ctx));
 }
 
 void loop() {
-  scheduler.schedule();                            // un tick: tutti i task fanno un passo
+  scheduler.schedule();
 
   if (ctx.state == IDLE) {
-    idleTimeMs += BASE_PERIOD;                     // conto il tempo passato in IDLE
+    idleTimeMs += BASE_PERIOD;
     if (idleTimeMs >= SLEEP_DELAY_MS) {
       goToSleep();
-      idleTimeMs = 0;                              // al risveglio riparto da zero
+      idleTimeMs = 0;
     }
   } else {
-    idleTimeMs = 0;                                // fuori da IDLE non si dorme
+    idleTimeMs = 0;
   }
 }

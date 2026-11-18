@@ -20,7 +20,7 @@
 #define SONAR_ECHO_PIN 3
 #define SONAR_TRIG_PIN 11
 
-#define SONAR_MAX_DISTANCE 0.40 // portata massima in metri
+#define SONAR_MAX_DISTANCE 0.40
 
 // Potentiometer
 #define POT_PIN A0

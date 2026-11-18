@@ -18,7 +18,11 @@ class ScanTask : public Task {
         Sonar* sonar;
         RadarServo* servo;
         int currentSector = 0;
+        bool isFirstAlarm = true;
+        bool potMoved = false;
+        int initialPotAngle = 0;
 
         void scanStep(); //muove il servo, misura, e aggiorna il context
         int angleToSector(int angle, int numSectors);
+        int sectorToAngle(int sector, int numSectors);
 };

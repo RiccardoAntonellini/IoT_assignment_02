@@ -8,6 +8,9 @@ ScanTask::ScanTask(Sonar* sonar, Context* ctx, Potentiometer* pot, RadarServo* s
     this->servo = servo;
     this->currentSector = 0;
     this->state = STOPPED;
+    this->isFirstAlarm = true;
+    this->potMoved = false;
+    this->initialPotAngle = 0;
 }
 
 void ScanTask::scanStep() {
@@ -32,6 +35,17 @@ int ScanTask::angleToSector(int angle, int numSectors) {
     // Usando la divisione intera, 180 / 18 darebbe 10 (fuori range 0..9), quindi usiamo min()
     int sector = (angle * numSectors) / 180;
     return min(sector, numSectors - 1);
+}
+
+int ScanTask::sectorToAngle(int sector, int numSectors) {
+    // Limita il settore per sicurezza tra 0 e numSectors - 1
+    sector = constrain(sector, 0, numSectors - 1);
+    
+    // Calcola il centro dello spicchio corrispondente al settore
+    // Esempio con 10 settori (ampiezza 18° ciascuno):
+    // settore 0 -> 9°, settore 1 -> 27°, ..., settore 9 -> 171°
+    int angle = ((sector * 2 + 1) * 180) / (numSectors * 2);
+    return constrain(angle, 0, 180);
 }
 
 void ScanTask::tick() {
@@ -76,12 +90,25 @@ void ScanTask::tick() {
     }
 
     else if(state == MANUAL) {
-        if(ctx -> state == ALARM) {
+        if(ctx->state == ALARM) {
             setPeriod(BASE_PERIOD);
-            int angle = pot->getAngle();
-            ctx -> manualAngle = angle;
+            int currentPotAngle = pot->getAngle();
+
+            if(isFirstAlarm) {
+                initialPotAngle = currentPotAngle;
+                isFirstAlarm = false;
+                potMoved = false;
+            }
+            if(!potMoved && abs(currentPotAngle - initialPotAngle) > 5) {
+                potMoved = true;
+            }
+
+            int angle = potMoved ? currentPotAngle : sectorToAngle(ctx->sector, N_SECTORS);
+
+            ctx->manualAngle = angle;
             servo->setAngle(angle);
             ctx->sector = angleToSector(angle, N_SECTORS);
+            
             float distance = sonar->measure(ctx->soundSpeed);
             ctx->distance = distance;
             ctx->foundObject = (distance > 0 && distance < SONAR_MAX_DISTANCE);
@@ -89,6 +116,8 @@ void ScanTask::tick() {
         else {
             state = STOPPED;
             setPeriod(SCAN_PERIOD_S1);
+            isFirstAlarm = true;
+            potMoved = false;
         }
     }
 }

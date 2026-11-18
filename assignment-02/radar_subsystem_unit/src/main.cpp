@@ -20,9 +20,11 @@ void setup() {
 
   //ogni task creato una volta sola e aggiunto in ordine di esecuzione, tutta la logica sta nei task stessi
   Led *greenLed = new Led(LED_ON_PIN);
+  greenLed->init();
   scheduler.addTask(new SystemTask(&ctx, greenLed));
 
   Led *redLed = new Led(LED_ALARM_PIN);
+  redLed->init();
   scheduler.addTask(new LedTask(&ctx, redLed));
 
   Button *startButton = new Button(START_BUTTON_PIN);
